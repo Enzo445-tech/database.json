@@ -801,7 +801,18 @@
         document.getElementById('modalBody').innerHTML = bodyHTML;
         
         const downloadBtn = document.getElementById('modalDownload');
-        downloadBtn.href = currentApp.download;
+   // Remplace la ligne 804 par ce bloc pour forcer le téléchargement direct
+const downloadBtn = document.getElementById('modalDownload');
+downloadBtn.onclick = function(e) {
+    e.preventDefault(); // Empêche la redirection 404
+    const link = document.createElement('a');
+    link.href = currentApp.download;
+    link.download = ''; // Force le téléchargement du fichier PKG
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+};
         
         if (currentApp.category === 'themes') {
             downloadBtn.innerHTML = '📥 TÉLÉCHARGER LE THÈME (PKG)';
