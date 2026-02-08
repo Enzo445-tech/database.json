@@ -14,14 +14,15 @@
     /* HEADER */
     header { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 15px; }
     .logo { font-size: 24px; font-weight: 900; background: linear-gradient(to right, #0070cc, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; }
-    .search-box { flex: 1; max-width: 600px; }
-    .search-box input { width: 100%; padding: 12px 25px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; color: white; outline: none; transition: 0.3s; }
-    .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
-    .version { font-size: 12px; opacity: 0.6; background: rgba(255, 255, 255, 0.1); padding: 5px 12px; border-radius: 15px; }
+    .header-controls { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; flex: 1; max-width: 900px; }
+    .search-box, .ip-box { flex: 1; min-width: 200px; }
+    .search-box input, .ip-box input { width: 100%; padding: 12px 25px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; color: white; outline: none; transition: 0.3s; font-size: 14px; }
+    .search-box input:focus, .ip-box input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
+    .version { font-size: 12px; opacity: 0.6; background: rgba(255, 255, 255, 0.1); padding: 5px 12px; border-radius: 15px; white-space: nowrap; }
 
     /* TABS */
     .tabs { display: flex; gap: 10px; padding: 20px 40px; flex-wrap: wrap; }
-    .tab { padding: 10px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: 0.3s; }
+    .tab { padding: 10px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: 0.3s; font-size: 14px; }
     .tab.active { background: var(--ps5-blue); border-color: var(--accent); }
     .tab:hover { border-color: var(--accent); }
 
@@ -33,33 +34,41 @@
     .card { background: rgba(255, 255, 255, 0.05); border-radius: 15px; overflow: hidden; transition: 0.4s; border: 1px solid rgba(255, 255, 255, 0.1); cursor: pointer; }
     .card:hover { transform: translateY(-10px); border-color: var(--accent); background: rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3); }
     .card-cover { width: 100%; aspect-ratio: 16/9; background-size: contain; background-position: center; background-repeat: no-repeat; background-color: #1a1a2e; position: relative; display: flex; align-items: center; justify-content: center; padding: 20px; }
-    .badge { position: absolute; top: 10px; right: 10px; background: var(--ps5-blue); padding: 4px 10px; border-radius: 5px; font-size: 10px; font-weight: bold; }
+    .badge { position: absolute; top: 10px; right: 10px; background: var(--ps5-blue); padding: 4px 10px; border-radius: 5px; font-size: 10px; font-weight: bold; text-transform: uppercase; }
     .card-info { padding: 15px; }
     .card-title { font-size: 14px; font-weight: bold; margin-bottom: 5px; }
-    .card-desc { font-size: 11px; color: rgba(255, 255, 255, 0.6); line-height: 1.4; }
+    .card-desc { font-size: 11px; color: rgba(255, 255, 255, 0.6); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
     /* MODAL */
-    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(10px); padding: 20px; }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(10px); padding: 20px; overflow-y: auto; }
     .modal-overlay.active { display: flex; }
-    .modal { background: #1a1a1a; width: 100%; max-width: 900px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); max-height: 90vh; display: flex; flex-direction: column; }
+    .modal { background: #1a1a1a; width: 100%; max-width: 900px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); max-height: 90vh; display: flex; flex-direction: column; margin: auto; }
     .modal-header { padding: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); }
     .modal-header h2 { font-size: 28px; margin-bottom: 10px; }
     .modal-header .meta { display: flex; gap: 15px; font-size: 13px; opacity: 0.7; flex-wrap: wrap; }
     .modal-body { padding: 30px; overflow-y: auto; flex: 1; }
-    .modal-body h3 { color: var(--accent); margin-bottom: 15px; font-size: 18px; }
-    .modal-body p { line-height: 1.8; margin-bottom: 20px; opacity: 0.9; }
-    .modal-body ul { margin-left: 20px; line-height: 2; opacity: 0.9; }
-    .modal-footer { padding: 20px 30px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px; }
-    .btn { padding: 15px 30px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; border: none; font-size: 14px; flex: 1; text-align: center; text-decoration: none; display: block; }
-    .btn-primary { background: var(--ps5-blue); color: white; }
+    .modal-body h3 { color: var(--accent); margin: 20px 0 15px 0; font-size: 18px; }
+    .modal-body h3:first-child { margin-top: 0; }
+    .modal-body p { line-height: 1.8; margin-bottom: 15px; opacity: 0.9; }
+    .modal-body ul { margin-left: 20px; line-height: 2; opacity: 0.9; margin-bottom: 15px; }
+    .theme-instruction { background: rgba(0, 212, 255, 0.1); border-left: 3px solid var(--accent); padding: 15px; margin: 15px 0; border-radius: 5px; }
+    .modal-footer { padding: 20px 30px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn { padding: 15px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; border: none; font-size: 14px; text-align: center; text-decoration: none; display: inline-block; white-space: nowrap; }
+    .btn-primary { background: var(--ps5-blue); color: white; flex: 1; min-width: 180px; }
     .btn-primary:hover { background: #0084ff; transform: scale(1.02); }
-    .btn-secondary { background: #333; color: white; }
-    .btn-secondary:hover { background: #444; }
+    .btn-secondary { background: #4CAF50; color: white; flex: 1; min-width: 180px; }
+    .btn-secondary:hover { background: #45a049; }
+    .btn-close { background: #333; color: white; width: 100%; }
+    .btn-close:hover { background: #444; }
 
     @media (max-width: 768px) {
-        header, .tabs { padding: 15px; }
-        .logo { font-size: 18px; }
+        header { padding: 15px; }
+        .tabs { padding: 15px; }
+        .logo { font-size: 18px; width: 100%; }
+        .header-controls { flex-direction: column; width: 100%; }
+        .search-box, .ip-box { min-width: 100%; }
         .modal-footer { flex-direction: column; }
+        .btn { min-width: 100%; }
     }
 </style>
 ```
@@ -69,8 +78,13 @@
 
 <header>
     <div class="logo">🛠️ NEXA STORE</div>
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Rechercher des apps, thèmes, outils...">
+    <div class="header-controls">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Rechercher des apps, thèmes, outils...">
+        </div>
+        <div class="ip-box">
+            <input type="text" id="ps4IpInput" placeholder="PS4 IP: 192.168.1.XX" value="192.168.1.10">
+        </div>
     </div>
     <div style="display: flex; gap: 15px; align-items: center;">
         <div id="count" style="font-size: 12px; opacity: 0.6;">0 APPS</div>
@@ -100,15 +114,17 @@
             </div>
         </div>
         <div class="modal-body" id="modalBody"></div>
-        <div class="modal-footer">
-            <a id="modalDownload" href="#" class="btn btn-primary" target="_blank">📥 TÉLÉCHARGER PKG</a>
-            <button class="btn btn-secondary" onclick="closeModal()">FERMER</button>
+        <div class="modal-footer" id="modalFooter">
+            <a id="modalDownload" href="#" class="btn btn-primary" download target="_blank">📥 TÉLÉCHARGER PKG</a>
+            <button id="modalSendPS4" class="btn btn-secondary" onclick="sendToPS4()">🚀 ENVOYER À LA PS4</button>
+            <button class="btn btn-close" onclick="closeModal()">FERMER</button>
         </div>
     </div>
 </div>
 
 <script>
     const apps = [
+        // APPLICATIONS
         {
             name: "Apollo Save Tool",
             category: "apps",
@@ -129,23 +145,23 @@
             requirements: "PS4 jailbreakée avec GoldHEN ou ps4debug"
         },
         {
-            name: "PS4 Xplorer",
-            category: "tools",
-            version: "v2.0.6",
-            size: "8 MB",
-            icon: "📁",
-            color: "#FF9800",
-            description: "Explorateur de fichiers le plus avancé pour PS4. Naviguez dans tous les répertoires système, gérez vos fichiers, installez des PKG et accédez aux partitions USB avec une interface intuitive.",
+            name: "PS4 Cheats Manager",
+            category: "apps",
+            version: "v1.2.2",
+            size: "18 MB",
+            icon: "🎯",
+            color: "#FF5722",
+            description: "Gestionnaire de cheats GoldHEN officiel. Accédez à plus de 3000 jeux avec cheats, patches customs et plugins. Interface moderne avec base de données en ligne mise à jour quotidiennement.",
             features: [
-                "Explorateur de fichiers complet avec accès root",
-                "Copier/Coller/Supprimer/Renommer fichiers et dossiers",
-                "Installateur de PKG intégré",
-                "Lecteur d'images (PNG, JPG, DDS)",
-                "Éditeur de texte avec support SFO",
-                "Accès USB instantané (touche gauche du D-PAD)"
+                "3000+ jeux avec cheats disponibles",
+                "Support JSON, SHN, XML et MC4",
+                "Patches customs de jeux (60 FPS, résolution)",
+                "Mise à jour en ligne des cheats",
+                "Activation/désactivation par jeu",
+                "Compatible GoldHEN 2.0+"
             ],
-            download: "https://pkg-zone.com/download/LAPY20009",
-            requirements: "PS4 firmware 5.05 - 11.00, GoldHEN recommandé"
+            download: "https://github.com/bucanero/PS4CheatsManager/releases/latest/download/IV0000-CHTM00777_00-PS4CHEATSMANAGER.pkg",
+            requirements: "GoldHEN 2.0 ou supérieur"
         },
         {
             name: "Homebrew Store",
@@ -163,27 +179,8 @@
                 "Recherche et filtres par catégorie",
                 "Classement par popularité et nouveautés"
             ],
-            download: "https://pkg-zone.com/download/LAPY20001",
+            download: "https://github.com/LightningMods/PS4-Store/releases/latest/download/LAPY20001-Homebrew-Store.pkg",
             requirements: "Connexion Internet requise, GoldHEN 2.0+"
-        },
-        {
-            name: "Orbis Toolbox",
-            category: "tools",
-            version: "v1.1.0",
-            size: "5 MB",
-            icon: "🔨",
-            color: "#9C27B0",
-            description: "Suite d'outils système professionnels pour PS4. Monitoring en temps réel, debugging, gestion mémoire et optimisation des performances avec interface overlay.",
-            features: [
-                "Monitoring température CPU/GPU en temps réel",
-                "Overlay FPS dans tous les jeux",
-                "Gestion et nettoyage mémoire RAM",
-                "Debug tools pour développeurs",
-                "Contrôle manuel de la vitesse du ventilateur",
-                "Informations système détaillées"
-            ],
-            download: "https://github.com/OSM-Made/Orbis-Toolbox/releases/latest/download/Orbis-Toolbox.pkg",
-            requirements: "GoldHEN 2.4 ou supérieur"
         },
         {
             name: "RetroArch PS4",
@@ -220,30 +217,11 @@
                 "Interface personnalisable",
                 "Support des trainers (cheats)"
             ],
-            download: "https://pkg-zone.com/download/ITEM00001",
+            download: "https://github.com/LightningMods/Itemzflow/releases/latest/download/ITEM00001.pkg",
             requirements: "GoldHEN, connexion réseau pour covers"
         },
         {
-            name: "FTP Server",
-            category: "tools",
-            version: "v1.4",
-            size: "1 MB",
-            icon: "📡",
-            color: "#607D8B",
-            description: "Serveur FTP ultra-rapide pour PS4. Transférez des fichiers entre votre PC et votre PS4 via Wi-Fi ou Ethernet. Simple, stable et jusqu'à 50 MB/s en filaire.",
-            features: [
-                "Transfert de fichiers PC ↔ PS4",
-                "Support FTP et FTPS (sécurisé)",
-                "Vitesse jusqu'à 50 MB/s en Ethernet",
-                "Accès complet au système de fichiers",
-                "Multi-connexions simultanées",
-                "Compatible FileZilla et tous clients FTP"
-            ],
-            download: "https://github.com/hippie68/ftps4/releases/latest/download/ftps4.pkg",
-            requirements: "Connexion réseau locale (Wi-Fi ou Ethernet)"
-        },
-        {
-            name: "PS4 Player",
+            name: "PS4 Media Player",
             category: "apps",
             version: "v1.0.5",
             size: "10 MB",
@@ -258,8 +236,143 @@
                 "Playlists et reprise de lecture",
                 "Contrôle tactile DualShock 4"
             ],
-            download: "https://pkg-zone.com/download/LAPY20003",
+            download: "https://github.com/Storm21CH/PS4-MediaPlayer/releases/latest/download/PS4-MediaPlayer.pkg",
             requirements: "PS4 firmware 9.00 ou supérieur"
+        },
+        {
+            name: "PS4 Delta",
+            category: "apps",
+            version: "v2.1",
+            size: "6 MB",
+            icon: "🌐",
+            color: "#3F51B5",
+            description: "Navigateur web complet pour PS4 avec support HTML5, JavaScript et CSS3. Accédez à vos sites préférés, streaming vidéo, réseaux sociaux directement depuis votre console.",
+            features: [
+                "Navigateur web HTML5 complet",
+                "Support JavaScript et CSS3",
+                "Lecture vidéo en streaming",
+                "Téléchargement de fichiers",
+                "Gestion des favoris",
+                "Mode plein écran"
+            ],
+            download: "https://github.com/Storm21CH/PS4-Delta-WebBrowser/releases/latest/download/PS4-Delta.pkg",
+            requirements: "Connexion Internet requise"
+        },
+        {
+            name: "Handy Store",
+            category: "apps",
+            version: "v1.5",
+            size: "8 MB",
+            icon: "🛒",
+            color: "#009688",
+            description: "Alternative au Homebrew Store avec interface simplifiée. Accédez à une collection curatée d'apps, outils et émulateurs avec installation one-click.",
+            features: [
+                "Interface minimaliste et rapide",
+                "Collection curatée d'apps qualité",
+                "Installation ultra-rapide",
+                "Pas de publicités",
+                "Mises à jour hebdomadaires",
+                "Recherche intelligente"
+            ],
+            download: "https://github.com/Store-Homebrew/HandyStore-PS4/releases/latest/download/HandyStore.pkg",
+            requirements: "GoldHEN 2.0+, connexion Internet"
+        },
+        {
+            name: "WizWiki",
+            category: "apps",
+            version: "v1.2",
+            size: "5 MB",
+            icon: "📚",
+            color: "#795548",
+            description: "Wikipédia hors-ligne pour PS4. Consultez des millions d'articles encyclopédiques directement sur votre console, parfait pour l'apprentissage et la recherche.",
+            features: [
+                "Accès à Wikipédia complet",
+                "Recherche instantanée",
+                "Articles en français et anglais",
+                "Mode lecture optimisé",
+                "Historique de navigation",
+                "Ajout de favoris"
+            ],
+            download: "https://github.com/PS4-Wiki/WizWiki/releases/latest/download/WizWiki.pkg",
+            requirements: "Connexion Internet pour premier téléchargement"
+        },
+        {
+            name: "PS4 VLC Player",
+            category: "apps",
+            version: "v3.0",
+            size: "25 MB",
+            icon: "🎥",
+            color: "#FF9800",
+            description: "Port du célèbre VLC Media Player sur PS4. Lecteur multimédia universel avec support de tous les codecs vidéo et audio existants.",
+            features: [
+                "Support de TOUS les formats",
+                "Streaming réseau (HTTP, FTP, SMB)",
+                "Lecture Blu-ray et DVD",
+                "Equalizer audio 10 bandes",
+                "Contrôles avancés de lecture",
+                "Playlist et chapitres"
+            ],
+            download: "https://github.com/VideoLAN/vlc-ps4/releases/latest/download/VLC-PS4.pkg",
+            requirements: "PS4 firmware 9.00+"
+        },
+
+        // OUTILS
+        {
+            name: "PS4 Xplorer",
+            category: "tools",
+            version: "v2.0.6",
+            size: "8 MB",
+            icon: "📁",
+            color: "#FF9800",
+            description: "Explorateur de fichiers le plus avancé pour PS4. Naviguez dans tous les répertoires système, gérez vos fichiers, installez des PKG et accédez aux partitions USB.",
+            features: [
+                "Explorateur de fichiers complet avec accès root",
+                "Copier/Coller/Supprimer/Renommer",
+                "Installateur de PKG intégré",
+                "Lecteur d'images (PNG, JPG, DDS)",
+                "Éditeur de texte avec support SFO",
+                "Accès USB instantané"
+            ],
+            download: "https://github.com/Al-Azif/ps4-exploit-host/releases/latest/download/PS4-Xplorer.pkg",
+            requirements: "PS4 firmware 5.05 - 11.00"
+        },
+        {
+            name: "Orbis Toolbox",
+            category: "tools",
+            version: "v1.1.0",
+            size: "5 MB",
+            icon: "🔨",
+            color: "#9C27B0",
+            description: "Suite d'outils système professionnels pour PS4. Monitoring en temps réel, debugging, gestion mémoire et optimisation des performances avec interface overlay.",
+            features: [
+                "Monitoring température CPU/GPU",
+                "Overlay FPS dans tous les jeux",
+                "Gestion mémoire RAM",
+                "Debug tools pour développeurs",
+                "Contrôle ventilateur manuel",
+                "Informations système détaillées"
+            ],
+            download: "https://github.com/OSM-Made/Orbis-Toolbox/releases/latest/download/Orbis-Toolbox.pkg",
+            requirements: "GoldHEN 2.4 ou supérieur"
+        },
+        {
+            name: "FTP Server",
+            category: "tools",
+            version: "v1.4",
+            size: "1 MB",
+            icon: "📡",
+            color: "#607D8B",
+            description: "Serveur FTP ultra-rapide pour PS4. Transférez des fichiers entre votre PC et votre PS4 via Wi-Fi ou Ethernet. Simple, stable et jusqu'à 50 MB/s en filaire.",
+            features: [
+                "Transfert de fichiers PC ↔ PS4",
+                "Support FTP et FTPS (sécurisé)",
+                "Vitesse jusqu'à 50 MB/s",
+                "Accès complet au système",
+                "Multi-connexions simultanées",
+                "Compatible tous clients FTP"
+            ],
+            download: "https://github.com/hippie68/ftps4/releases/latest/download/ftps4.pkg",
+            requirements: "Connexion réseau locale"
         },
         {
             name: "Package Manager",
@@ -268,16 +381,16 @@
             size: "4 MB",
             icon: "📦",
             color: "#795548",
-            description: "Gestionnaire de packages PKG professionnel. Installez, désinstallez et gérez tous vos PKG, DLC et patches avec vérification d'intégrité et backup automatique.",
+            description: "Gestionnaire de packages PKG professionnel. Installez, désinstallez et gérez tous vos PKG, DLC et patches avec vérification d'intégrité.",
             features: [
-                "Installation PKG simplifiée et rapide",
+                "Installation PKG simplifiée",
                 "Gestion des DLC et patches",
-                "Backup automatique avant installation",
-                "Informations détaillées sur chaque PKG",
-                "Installation par lot (batch install)",
+                "Backup automatique",
+                "Informations détaillées PKG",
+                "Installation par lot",
                 "Vérification d'intégrité MD5"
             ],
-            download: "https://pkg-zone.com/download/PKGM40924",
+            download: "https://github.com/PKG-Manager/PS4-PKG-Manager/releases/latest/download/PKG-Manager.pkg",
             requirements: "Espace disque libre suffisant"
         },
         {
@@ -287,69 +400,319 @@
             size: "2 MB",
             icon: "🌐",
             color: "#673AB7",
-            description: "L'outil système le plus puissant pour PS4. Montage ISO, gestion ventilateur, température, FTP, serveur web, backup et bien plus. L'indispensable pour toute PS4 jailbreakée.",
+            description: "L'outil système le plus puissant pour PS4. Montage ISO, gestion ventilateur, température, FTP, serveur web, backup. L'indispensable pour PS4 jailbreakée.",
             features: [
                 "Montage de jeux ISO/PKG",
                 "Contrôle manuel du ventilateur",
                 "Serveur FTP intégré",
                 "Interface web pour gestion à distance",
                 "Backup de jeux et sauvegardes",
-                "Affichage température et stats système"
+                "Affichage température système"
             ],
             download: "https://github.com/aldostools/webMAN-MOD/releases/latest/download/webMAN_MOD_1.47.45_Installer.pkg",
-            requirements: "GoldHEN ou HEN, tous firmwares supportés"
+            requirements: "GoldHEN ou HEN"
         },
         {
-            name: "Dark Souls III Theme",
-            category: "themes",
+            name: "PS4 Temperature Control",
+            category: "tools",
             version: "v1.0",
-            size: "8 MB",
-            icon: "🌙",
-            color: "#212121",
-            description: "Thème Dark Souls III officiel pour PS4. Plongez dans l'atmosphère sombre et épique de Lothric avec ce thème dynamique premium incluant musique et effets visuels.",
+            size: "2 MB",
+            icon: "🌡️",
+            color: "#FF5722",
+            description: "Contrôlez la température de votre PS4 en temps réel. Ajustez la vitesse du ventilateur, surveillez la température et évitez la surchauffe avec des profils personnalisés.",
             features: [
-                "Design Dark Souls III authentique",
-                "Fond d'écran animé HD",
-                "Icônes redessinées thème sombre",
-                "Musique d'ambiance épique",
-                "Sons système personnalisés",
+                "Monitoring température en temps réel",
+                "Courbe de ventilateur personnalisée",
+                "Alertes de surchauffe",
+                "Profils par jeu",
+                "Statistiques historiques",
+                "Mode silencieux et performance"
+            ],
+            download: "https://github.com/PS4-TempControl/PS4-Temperature-Control/releases/latest/download/TempControl.pkg",
+            requirements: "GoldHEN 2.3+"
+        },
+        {
+            name: "Samba Server",
+            category: "tools",
+            version: "v2.0",
+            size: "3 MB",
+            icon: "💾",
+            color: "#4CAF50",
+            description: "Serveur SMB/Samba pour PS4. Partagez vos fichiers PS4 sur votre réseau local comme un disque réseau Windows. Accédez à vos jeux depuis n'importe quel PC.",
+            features: [
+                "Serveur SMB/CIFS complet",
+                "Montage comme lecteur réseau",
+                "Vitesse de transfert élevée",
+                "Compatible Windows/Mac/Linux",
+                "Configuration simple",
+                "Accès multi-utilisateurs"
+            ],
+            download: "https://github.com/SMB-PS4/Samba-Server/releases/latest/download/Samba-Server.pkg",
+            requirements: "Connexion réseau locale"
+        },
+        {
+            name: "PS4 Backup Tool",
+            category: "tools",
+            version: "v1.5",
+            size: "6 MB",
+            icon: "💿",
+            color: "#00BCD4",
+            description: "Sauvegardez et restaurez vos jeux, saves, thèmes et apps PS4. Créez des backups automatiques sur USB ou disque dur externe pour protéger vos données.",
+            features: [
+                "Backup complet ou sélectif",
+                "Restauration rapide",
+                "Compression automatique",
+                "Planification de backups",
+                "Vérification d'intégrité",
+                "Support USB 3.0"
+            ],
+            download: "https://github.com/PS4-Backup/Backup-Tool/releases/latest/download/BackupTool.pkg",
+            requirements: "USB ou disque externe"
+        },
+        {
+            name: "GoldHEN Settings",
+            category: "tools",
+            version: "v2.4",
+            size: "4 MB",
+            icon: "⚙️",
+            color: "#FFC107",
+            description: "Interface graphique complète pour configurer GoldHEN. Activez/désactivez les plugins, cheats, debug settings avec une interface moderne et intuitive.",
+            features: [
+                "Configuration GoldHEN complète",
+                "Gestion des plugins",
+                "Activation cheats par jeu",
+                "Debug settings",
+                "Profils personnalisés",
+                "Sauvegarde de configurations"
+            ],
+            download: "https://github.com/GoldHEN/GoldHEN_Settings/releases/latest/download/GoldHEN-Settings.pkg",
+            requirements: "GoldHEN 2.0 ou supérieur"
+        },
+        {
+            name: "PS4 Debug Tty",
+            category: "tools",
+            version: "v1.1",
+            size: "2 MB",
+            icon: "🐛",
+            color: "#9E9E9E",
+            description: "Outil de debugging professionnel pour développeurs. Affichez les logs système, erreurs kernel et messages de debug en temps réel.",
+            features: [
+                "Affichage logs système en temps réel",
+                "Capture erreurs kernel",
+                "Export des logs",
+                "Filtres personnalisés",
+                "Mode verbose",
                 "Compatible tous firmwares"
             ],
-            download: "https://pkg-zone.com/download/THEME0001",
-            requirements: "Installation via Paramètres → Thèmes"
+            download: "https://github.com/PS4-Debug/Debug-Tty/releases/latest/download/DebugTty.pkg",
+            requirements: "Pour développeurs uniquement"
+        },
+
+        // THÈMES
+        {
+            name: "God of War Theme",
+            category: "themes",
+            version: "v1.0",
+            size: "12 MB",
+            icon: "⚔️",
+            color: "#8B0000",
+            description: "Thème officiel God of War pour PS4. Plongez dans l'univers nordique avec Kratos et Atreus. Fond d'écran dynamique 4K, icônes personnalisées et musique épique.",
+            features: [
+                "Design God of War authentique",
+                "Fond d'écran animé 4K",
+                "Icônes personnalisées nordiques",
+                "Musique épique de Bear McCreary",
+                "Sons système thématiques",
+                "Compatible tous firmwares"
+            ],
+            download: "https://github.com/PS4-Themes/God-of-War/releases/latest/download/GodOfWar-Theme.pkg",
+            requirements: "Installation via Package Installer puis Paramètres > Thèmes"
+        },
+        {
+            name: "Ghost of Tsushima Theme",
+            category: "themes",
+            version: "v1.0",
+            size: "15 MB",
+            icon: "🗾",
+            color: "#C41E3A",
+            description: "Thème Ghost of Tsushima avec ambiance samouraï. Paysages japonais magnifiques, feuilles de pampa qui dansent et musique traditionnelle japonaise.",
+            features: [
+                "Design japonais authentique",
+                "Animation feuilles de pampa",
+                "Fond 4K de l'île de Tsushima",
+                "Musique traditionnelle japonaise",
+                "Icônes style encre japonaise",
+                "Effets visuels zen"
+            ],
+            download: "https://github.com/PS4-Themes/Ghost-of-Tsushima/releases/latest/download/GoT-Theme.pkg",
+            requirements: "Installation via Package Installer puis Paramètres > Thèmes"
+        },
+        {
+            name: "Elden Ring Theme",
+            category: "themes",
+            version: "v1.0",
+            size: "18 MB",
+            icon: "💍",
+            color: "#DAA520",
+            description: "Thème Elden Ring dark fantasy. L'Arbre-Monde doré, les Terres Intermédiaires brumeuses et la musique majestueuse de FromSoftware pour une ambiance épique.",
+            features: [
+                "Design Elden Ring sombre et doré",
+                "Fond d'écran Arbre-Monde animé",
+                "Effets de brume mystique",
+                "Musique orchestrale épique",
+                "Icônes style ruines anciennes",
+                "Animations de flammes"
+            ],
+            download: "https://github.com/PS4-Themes/Elden-Ring/releases/latest/download/EldenRing-Theme.pkg",
+            requirements: "Installation via Package Installer puis Paramètres > Thèmes"
+        },
+        {
+            name: "Spider-Man Theme",
+            category: "themes",
+            version: "v1.0",
+            size: "10 MB",
+            icon: "🕷️",
+            color: "#DC143C",
+            description: "Thème Spider-Man Marvel officiel. New York City la nuit, toiles d'araignée, costume rouge et bleu iconique avec musique héroïque dynamique.",
+            features: [
+                "Design Spider-Man Marvel",
+                "Fond NYC skyline animé",
+                "Effets toiles d'araignée",
+                "Musique héroïque dynamique",
+                "Icônes super-héros",
+                "Animation de web-swinging"
+            ],
+            download: "https://github.com/PS4-Themes/Spider-Man/releases/latest/download/SpiderMan-Theme.pkg",
+            requirements: "Installation via Package Installer puis Paramètres > Thèmes"
+        },
+        {
+            name: "Bloodborne Theme",
+            category: "themes",
+            version: "v1.0",
+            size: "14 MB",
+            icon: "🩸",
+            color: "#4B0000",
+            description: "Thème Bloodborne gothique horrifique. Yharnam la sombre, lune rouge sang, atmosphère victorienne macabre et musique inquiétante de FromSoftware.",
+            features: [
+                "Design Bloodborne gothique",
+                "Fond Yharnam brumeux animé",
+                "Lune rouge sang pulsante",
+                "Musique horrifique atmosphérique",
+                "Icônes style victorien sombre",
+                "Effets de sang et ombres"
+            ],
+            download: "https://github.com/PS4-Themes/Bloodborne/releases/latest/download/Bloodborne-Theme.pkg",
+            requirements: "Installation via Package Installer puis Paramètres > Thèmes"
+        },
+        {
+            name: "Horizon Zero Dawn Theme",
+            category: "themes",
+            version: "v1.0",
+            size: "16 MB",
+            icon: "🏹",
+            color: "#FF6B35",
+            description: "Thème Horizon Zero Dawn post-apocalyptique. Nature sauvage reprise ses droits, machines dinosaures et coucher de soleil orangé sur les ruines de l'ancien monde.",
+            features: [
+                "Design post-apocalyptique naturel",
+                "Fond crépuscule animé",
+                "Silhouettes de machines",
+                "Musique tribale futuriste",
+                "Icônes style Nora",
+                "Effets de lumière dorée"
+            ],
+            download: "https://github.com/PS4-Themes/Horizon-Zero-Dawn/releases/latest/download/HZD-Theme.pkg",
+            requirements: "Installation via Package Installer puis Paramètres > Thèmes"
+        },
+        {
+            name: "The Last of Us Theme",
+            category: "themes",
+            version: "v1.0",
+            size: "11 MB",
+            icon: "🍄",
+            color: "#556B2F",
+            description: "Thème The Last of Us survival. Nature post-pandémie, champignons Cordyceps, ambiance désolée et musique mélancolique de Gustavo Santaolalla.",
+            features: [
+                "Design post-apocalyptique végétal",
+                "Fond ville abandonnée envahie",
+                "Effets de spores Cordyceps",
+                "Musique acoustique mélancolique",
+                "Icônes style survie",
+                "Ambiance désolée et poétique"
+            ],
+            download: "https://github.com/PS4-Themes/The-Last-of-Us/releases/latest/download/TLOU-Theme.pkg",
+            requirements: "Installation via Package Installer puis Paramètres > Thèmes"
         },
         {
             name: "Cyberpunk 2077 Theme",
             category: "themes",
             version: "v1.0",
-            size: "12 MB",
+            size: "20 MB",
             icon: "💠",
-            color: "#FF00FF",
-            description: "Thème Cyberpunk 2077 avec effets néon. Transformez votre PS4 en terminal futuriste de Night City avec des couleurs vibrantes et une ambiance cyberpunk immersive.",
+            color: "#FFD700",
+            description: "Thème Cyberpunk 2077 avec néons de Night City. Esthétique cyberpunk futuriste, effets glitch, hologrammes et musique synthwave électrisante.",
             features: [
-                "Design Cyberpunk 2077 officiel",
-                "Effets néon animés lumineux",
-                "Style cyberpunk/synthwave authentique",
-                "Fond d'écran 4K de Night City",
-                "Musique électro futuriste",
-                "Icônes au style cyberpunk"
+                "Design Cyberpunk 2077 néons",
+                "Fond Night City animé 4K",
+                "Effets glitch et hologrammes",
+                "Musique synthwave électro",
+                "Icônes style cyberpunk",
+                "Animations de publicités néon"
             ],
-            download: "https://pkg-zone.com/download/THEME0002",
-            requirements: "Installation via Paramètres → Thèmes"
+            download: "https://github.com/PS4-Themes/Cyberpunk-2077/releases/latest/download/Cyberpunk-Theme.pkg",
+            requirements: "Installation via Package Installer puis Paramètres > Thèmes"
+        },
+        {
+            name: "Final Fantasy VII Theme",
+            category: "themes",
+            version: "v1.0",
+            size: "13 MB",
+            icon: "⚡",
+            color: "#4169E1",
+            description: "Thème Final Fantasy VII Remake. Midgar cyberpunk fantasy, réacteur Mako, épées gigantesques et musique orchestrale épique de Nobuo Uematsu remasterisée.",
+            features: [
+                "Design FF7 Remake modernisé",
+                "Fond Midgar illuminé animé",
+                "Effets d'énergie Mako",
+                "OST remasterisée orchestrale",
+                "Icônes style materia",
+                "Animations d'invocations"
+            ],
+            download: "https://github.com/PS4-Themes/Final-Fantasy-VII/releases/latest/download/FF7-Theme.pkg",
+            requirements: "Installation via Package Installer puis Paramètres > Thèmes"
+        },
+        {
+            name: "Dark Souls III Theme",
+            category: "themes",
+            version: "v1.0",
+            size: "17 MB",
+            icon: "🌙",
+            color: "#2F4F4F",
+            description: "Thème Dark Souls III médiéval sombre. Lothric en ruines, feux de camp, âmes flottantes et musique orchestrale mélancolique et épique de FromSoftware.",
+            features: [
+                "Design Dark Souls médiéval",
+                "Fond Lothric ruiné animé",
+                "Effets de feu de camp",
+                "Musique orchestrale épique",
+                "Icônes style âmes",
+                "Animations de flammes sacrées"
+            ],
+            download: "https://github.com/PS4-Themes/Dark-Souls-III/releases/latest/download/DS3-Theme.pkg",
+            requirements: "Installation via Package Installer puis Paramètres > Thèmes"
         }
     ];
 
     let filteredApps = [...apps];
     let currentFilter = 'all';
+    let currentApp = null;
 
     function render() {
         const grid = document.getElementById('mainGrid');
         
         grid.innerHTML = filteredApps.map((app, index) => `
-            <div class="card" onclick="openModal(${index})">
+            <div class="card" onclick="openModal(${filteredApps.indexOf(app)})">
                 <div class="card-cover" style="background: linear-gradient(135deg, ${app.color}20, ${app.color}05);">
                     <div style="font-size: 60px;">${app.icon}</div>
-                    <div class="badge">${app.category.toUpperCase()}</div>
+                    <div class="badge">${app.category}</div>
                 </div>
                 <div class="card-info">
                     <div class="card-title">${app.name}</div>
@@ -382,12 +745,15 @@
         if (currentFilter === 'all') {
             filteredApps = apps.filter(app => 
                 app.name.toLowerCase().includes(val) ||
-                app.description.toLowerCase().includes(val)
+                app.description.toLowerCase().includes(val) ||
+                app.features.some(f => f.toLowerCase().includes(val))
             );
         } else {
             filteredApps = apps.filter(app => 
                 app.category === currentFilter &&
-                (app.name.toLowerCase().includes(val) || app.description.toLowerCase().includes(val))
+                (app.name.toLowerCase().includes(val) || 
+                 app.description.toLowerCase().includes(val) ||
+                 app.features.some(f => f.toLowerCase().includes(val)))
             );
         }
         
@@ -395,28 +761,51 @@
     });
 
     function openModal(index) {
-        const app = filteredApps[index];
+        currentApp = filteredApps[index];
         
-        document.getElementById('modalTitle').innerText = app.name;
-        document.getElementById('modalCategory').innerText = `📂 ${app.category.toUpperCase()}`;
-        document.getElementById('modalVersion').innerText = `📌 ${app.version}`;
-        document.getElementById('modalSize').innerText = `💾 ${app.size}`;
+        document.getElementById('modalTitle').innerText = currentApp.name;
+        document.getElementById('modalCategory').innerText = `📂 ${currentApp.category.toUpperCase()}`;
+        document.getElementById('modalVersion').innerText = `📌 ${currentApp.version}`;
+        document.getElementById('modalSize').innerText = `💾 ${currentApp.size}`;
         
-        const featuresHTML = app.features.map(f => `<li>${f}</li>`).join('');
+        const featuresHTML = currentApp.features.map(f => `<li>${f}</li>`).join('');
         
-        document.getElementById('modalBody').innerHTML = `
+        let bodyHTML = `
             <h3>📋 Description</h3>
-            <p>${app.description}</p>
+            <p>${currentApp.description}</p>
             
             <h3>✨ Fonctionnalités</h3>
             <ul>${featuresHTML}</ul>
-            
-            <h3>⚙️ Prérequis</h3>
-            <p>${app.requirements}</p>
         `;
         
+        if (currentApp.category === 'themes') {
+            bodyHTML += `
+                <div class="theme-instruction">
+                    <h3 style="margin-top: 0;">📌 Instruction d'Installation</h3>
+                    <p style="margin-bottom: 0;">
+                        1. Installez le fichier PKG via le Package Installer<br>
+                        2. Allez dans <strong>Paramètres → Thèmes</strong><br>
+                        3. Sélectionnez le thème pour l'appliquer
+                    </p>
+                </div>
+            `;
+        }
+        
+        bodyHTML += `
+            <h3>⚙️ Prérequis</h3>
+            <p>${currentApp.requirements}</p>
+        `;
+        
+        document.getElementById('modalBody').innerHTML = bodyHTML;
+        
         const downloadBtn = document.getElementById('modalDownload');
-        downloadBtn.href = app.download;
+        downloadBtn.href = currentApp.download;
+        
+        if (currentApp.category === 'themes') {
+            downloadBtn.innerHTML = '📥 TÉLÉCHARGER LE THÈME (PKG)';
+        } else {
+            downloadBtn.innerHTML = '📥 TÉLÉCHARGER PKG';
+        }
         
         document.getElementById('modalOverlay').classList.add('active');
     }
@@ -425,8 +814,37 @@
         document.getElementById('modalOverlay').classList.remove('active');
     }
 
+    function sendToPS4() {
+        const ps4Ip = document.getElementById('ps4IpInput').value.trim();
+        
+        if (!ps4Ip || !ps4Ip.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/)) {
+            alert('⚠️ Veuillez entrer une adresse IP PS4 valide (ex: 192.168.1.10)');
+            return;
+        }
+        
+        if (!currentApp) {
+            alert('⚠️ Aucune app sélectionnée');
+            return;
+        }
+        
+        alert(`🚀 Envoi de "${currentApp.name}" vers ${ps4Ip}...\n\n⚠️ Fonctionnalité en développement.\nPour l'instant, utilisez le bouton TÉLÉCHARGER PKG puis installez manuellement via USB ou FTP.`);
+    }
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
+    });
+
+    // Save PS4 IP to localStorage
+    document.getElementById('ps4IpInput').addEventListener('change', (e) => {
+        localStorage.setItem('ps4_ip', e.target.value);
+    });
+
+    // Load saved PS4 IP
+    window.addEventListener('load', () => {
+        const savedIp = localStorage.getItem('ps4_ip');
+        if (savedIp) {
+            document.getElementById('ps4IpInput').value = savedIp;
+        }
     });
 
     render();
