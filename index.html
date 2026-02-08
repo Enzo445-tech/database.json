@@ -12,22 +12,23 @@
 
 ```
     /* HEADER */
-    header { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 15px; }
-    .logo { font-size: 24px; font-weight: 900; background: linear-gradient(to right, #0070cc, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; }
-    .header-controls { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; flex: 1; max-width: 900px; }
-    .search-box, .ip-box { flex: 1; min-width: 200px; }
-    .search-box input, .ip-box input { width: 100%; padding: 12px 25px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; color: white; outline: none; transition: 0.3s; font-size: 14px; }
-    .search-box input:focus, .ip-box input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
-    .version { font-size: 12px; opacity: 0.6; background: rgba(255, 255, 255, 0.1); padding: 5px 12px; border-radius: 15px; white-space: nowrap; }
+    header { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 25px 50px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; gap: 30px; flex-wrap: wrap; }
+    .logo { font-size: 26px; font-weight: 900; background: linear-gradient(to right, #0070cc, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; min-width: 200px; }
+    .search-box { flex: 1; max-width: 700px; min-width: 300px; }
+    .search-box input { width: 100%; padding: 14px 28px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; color: white; outline: none; transition: 0.3s; font-size: 14px; }
+    .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
+    .header-info { display: flex; gap: 20px; align-items: center; }
+    .count { font-size: 13px; opacity: 0.7; white-space: nowrap; }
+    .version { font-size: 13px; opacity: 0.6; background: rgba(255, 255, 255, 0.1); padding: 6px 14px; border-radius: 15px; white-space: nowrap; }
 
     /* TABS */
-    .tabs { display: flex; gap: 10px; padding: 20px 40px; flex-wrap: wrap; }
-    .tab { padding: 10px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: 0.3s; font-size: 14px; }
+    .tabs { display: flex; gap: 12px; padding: 25px 50px; flex-wrap: wrap; }
+    .tab { padding: 12px 24px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: 0.3s; font-size: 14px; }
     .tab.active { background: var(--ps5-blue); border-color: var(--accent); }
     .tab:hover { border-color: var(--accent); }
 
     /* GRID */
-    .container { padding: 30px; max-width: 1600px; margin: 0 auto; }
+    .container { padding: 30px 50px; max-width: 1600px; margin: 0 auto; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; }
     
     /* CARDS */
@@ -52,21 +53,20 @@
     .modal-body p { line-height: 1.8; margin-bottom: 15px; opacity: 0.9; }
     .modal-body ul { margin-left: 20px; line-height: 2; opacity: 0.9; margin-bottom: 15px; }
     .theme-instruction { background: rgba(0, 212, 255, 0.1); border-left: 3px solid var(--accent); padding: 15px; margin: 15px 0; border-radius: 5px; }
-    .modal-footer { padding: 20px 30px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px; flex-wrap: wrap; }
-    .btn { padding: 15px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; border: none; font-size: 14px; text-align: center; text-decoration: none; display: inline-block; white-space: nowrap; }
-    .btn-primary { background: var(--ps5-blue); color: white; flex: 1; min-width: 180px; }
+    .modal-footer { padding: 25px 30px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { padding: 16px 32px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; border: none; font-size: 15px; text-align: center; text-decoration: none; display: inline-block; white-space: nowrap; flex: 1; min-width: 200px; }
+    .btn-primary { background: var(--ps5-blue); color: white; }
     .btn-primary:hover { background: #0084ff; transform: scale(1.02); }
-    .btn-secondary { background: #4CAF50; color: white; flex: 1; min-width: 180px; }
-    .btn-secondary:hover { background: #45a049; }
-    .btn-close { background: #333; color: white; width: 100%; }
+    .btn-close { background: #333; color: white; }
     .btn-close:hover { background: #444; }
 
     @media (max-width: 768px) {
-        header { padding: 15px; }
-        .tabs { padding: 15px; }
-        .logo { font-size: 18px; width: 100%; }
-        .header-controls { flex-direction: column; width: 100%; }
-        .search-box, .ip-box { min-width: 100%; }
+        header { padding: 20px; }
+        .tabs { padding: 20px; }
+        .container { padding: 20px; }
+        .logo { font-size: 20px; width: 100%; min-width: unset; }
+        .search-box { min-width: 100%; }
+        .header-info { width: 100%; justify-content: space-between; }
         .modal-footer { flex-direction: column; }
         .btn { min-width: 100%; }
     }
@@ -77,19 +77,12 @@
 <body>
 
 <header>
-    <div class="logo">
-    <img src="logo_nexa.png" alt="NEXA STORE" style="height: 60px; filter: drop-shadow(0 0 5px rgba(0, 112, 204, 0.5));">
-</div>
-    <div class="header-controls">
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Rechercher des apps, thèmes, outils...">
-        </div>
-        <div class="ip-box">
-            <input type="text" id="ps4IpInput" placeholder="PS4 IP: 192.168.1.XX" value="192.168.1.10">
-        </div>
+    <div class="logo">🛠️ NEXA STORE</div>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Rechercher des apps, thèmes, outils...">
     </div>
-    <div style="display: flex; gap: 15px; align-items: center;">
-        <div id="count" style="font-size: 12px; opacity: 0.6;">0 APPS</div>
+    <div class="header-info">
+        <div class="count" id="count">0 APPS</div>
         <div class="version">V1.0</div>
     </div>
 </header>
@@ -116,9 +109,8 @@
             </div>
         </div>
         <div class="modal-body" id="modalBody"></div>
-        <div class="modal-footer" id="modalFooter">
-            <a id="modalDownload" href="#" class="btn btn-primary" download target="_blank">📥 TÉLÉCHARGER PKG</a>
-            <button id="modalSendPS4" class="btn btn-secondary" onclick="sendToPS4()">🚀 ENVOYER À LA PS4</button>
+        <div class="modal-footer">
+            <button id="modalDownload" class="btn btn-primary">📥 TÉLÉCHARGER PKG</button>
             <button class="btn btn-close" onclick="closeModal()">FERMER</button>
         </div>
     </div>
@@ -143,7 +135,7 @@
                 "Import/Export de sauvegardes via USB",
                 "Base de données en ligne avec 1000+ saves"
             ],
-            download: "https://github.com/bucanero/apollo-ps4/releases/latest/download/apollo-ps4.pkg",
+            download: "https://github.com/bucanero/apollo-ps4/releases/download/v1.8.0/apollo-ps4.pkg",
             requirements: "PS4 jailbreakée avec GoldHEN ou ps4debug"
         },
         {
@@ -162,7 +154,7 @@
                 "Activation/désactivation par jeu",
                 "Compatible GoldHEN 2.0+"
             ],
-            download: "https://github.com/bucanero/PS4CheatsManager/releases/latest/download/IV0000-CHTM00777_00-PS4CHEATSMANAGER.pkg",
+            download: "https://github.com/bucanero/PS4CheatsManager/releases/download/v1.2.2/IV0000-CHTM00777_00-PS4CHEATSMANAGER.pkg",
             requirements: "GoldHEN 2.0 ou supérieur"
         },
         {
@@ -181,7 +173,7 @@
                 "Recherche et filtres par catégorie",
                 "Classement par popularité et nouveautés"
             ],
-            download: "https://github.com/LightningMods/PS4-Store/releases/latest/download/LAPY20001-Homebrew-Store.pkg",
+            download: "https://github.com/LightningMods/PS4-Store/releases/download/v3.2.0/LAPY20001-v3.2.0.pkg",
             requirements: "Connexion Internet requise, GoldHEN 2.0+"
         },
         {
@@ -219,7 +211,7 @@
                 "Interface personnalisable",
                 "Support des trainers (cheats)"
             ],
-            download: "https://github.com/LightningMods/Itemzflow/releases/latest/download/ITEM00001.pkg",
+            download: "https://github.com/LightningMods/Itemzflow/releases/download/v1.30/ITEM00001.pkg",
             requirements: "GoldHEN, connexion réseau pour covers"
         },
         {
@@ -238,11 +230,11 @@
                 "Playlists et reprise de lecture",
                 "Contrôle tactile DualShock 4"
             ],
-            download: "https://github.com/Storm21CH/PS4-MediaPlayer/releases/latest/download/PS4-MediaPlayer.pkg",
+            download: "https://github.com/Storm21CH/PS4-MediaPlayer/releases/download/1.0.5/PS4-MediaPlayer.pkg",
             requirements: "PS4 firmware 9.00 ou supérieur"
         },
         {
-            name: "PS4 Delta",
+            name: "PS4 Browser",
             category: "apps",
             version: "v2.1",
             size: "6 MB",
@@ -257,7 +249,7 @@
                 "Gestion des favoris",
                 "Mode plein écran"
             ],
-            download: "https://github.com/Storm21CH/PS4-Delta-WebBrowser/releases/latest/download/PS4-Delta.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Browser/PS4-Browser/main/PS4-Browser.pkg",
             requirements: "Connexion Internet requise"
         },
         {
@@ -276,7 +268,7 @@
                 "Mises à jour hebdomadaires",
                 "Recherche intelligente"
             ],
-            download: "https://github.com/Store-Homebrew/HandyStore-PS4/releases/latest/download/HandyStore.pkg",
+            download: "https://raw.githubusercontent.com/Store-Homebrew/HandyStore-PS4/main/HandyStore.pkg",
             requirements: "GoldHEN 2.0+, connexion Internet"
         },
         {
@@ -295,7 +287,7 @@
                 "Historique de navigation",
                 "Ajout de favoris"
             ],
-            download: "https://github.com/PS4-Wiki/WizWiki/releases/latest/download/WizWiki.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Wiki/WizWiki/main/WizWiki.pkg",
             requirements: "Connexion Internet pour premier téléchargement"
         },
         {
@@ -314,7 +306,7 @@
                 "Contrôles avancés de lecture",
                 "Playlist et chapitres"
             ],
-            download: "https://github.com/VideoLAN/vlc-ps4/releases/latest/download/VLC-PS4.pkg",
+            download: "https://raw.githubusercontent.com/VideoLAN/vlc-ps4/main/VLC-PS4.pkg",
             requirements: "PS4 firmware 9.00+"
         },
 
@@ -335,7 +327,7 @@
                 "Éditeur de texte avec support SFO",
                 "Accès USB instantané"
             ],
-            download: "https://github.com/Al-Azif/ps4-exploit-host/releases/latest/download/PS4-Xplorer.pkg",
+            download: "https://github.com/Al-Azif/ps4-exploit-host/releases/download/0.4.7/PS4-Xplorer.pkg",
             requirements: "PS4 firmware 5.05 - 11.00"
         },
         {
@@ -354,7 +346,7 @@
                 "Contrôle ventilateur manuel",
                 "Informations système détaillées"
             ],
-            download: "https://github.com/OSM-Made/Orbis-Toolbox/releases/latest/download/Orbis-Toolbox.pkg",
+            download: "https://github.com/OSM-Made/Orbis-Toolbox/releases/download/v1.1.0/Orbis-Toolbox.pkg",
             requirements: "GoldHEN 2.4 ou supérieur"
         },
         {
@@ -373,7 +365,7 @@
                 "Multi-connexions simultanées",
                 "Compatible tous clients FTP"
             ],
-            download: "https://github.com/hippie68/ftps4/releases/latest/download/ftps4.pkg",
+            download: "https://github.com/hippie68/ftps4/releases/download/v1.4/ftps4.pkg",
             requirements: "Connexion réseau locale"
         },
         {
@@ -392,7 +384,7 @@
                 "Installation par lot",
                 "Vérification d'intégrité MD5"
             ],
-            download: "https://github.com/PKG-Manager/PS4-PKG-Manager/releases/latest/download/PKG-Manager.pkg",
+            download: "https://raw.githubusercontent.com/PKG-Manager/PS4-PKG-Manager/main/PKG-Manager.pkg",
             requirements: "Espace disque libre suffisant"
         },
         {
@@ -411,7 +403,7 @@
                 "Backup de jeux et sauvegardes",
                 "Affichage température système"
             ],
-            download: "https://github.com/aldostools/webMAN-MOD/releases/latest/download/webMAN_MOD_1.47.45_Installer.pkg",
+            download: "https://github.com/aldostools/webMAN-MOD/releases/download/1.47.45/webMAN_MOD_1.47.45_Installer.pkg",
             requirements: "GoldHEN ou HEN"
         },
         {
@@ -430,7 +422,7 @@
                 "Statistiques historiques",
                 "Mode silencieux et performance"
             ],
-            download: "https://github.com/PS4-TempControl/PS4-Temperature-Control/releases/latest/download/TempControl.pkg",
+            download: "https://raw.githubusercontent.com/PS4-TempControl/PS4-Temperature-Control/main/TempControl.pkg",
             requirements: "GoldHEN 2.3+"
         },
         {
@@ -449,7 +441,7 @@
                 "Configuration simple",
                 "Accès multi-utilisateurs"
             ],
-            download: "https://github.com/SMB-PS4/Samba-Server/releases/latest/download/Samba-Server.pkg",
+            download: "https://raw.githubusercontent.com/SMB-PS4/Samba-Server/main/Samba-Server.pkg",
             requirements: "Connexion réseau locale"
         },
         {
@@ -468,7 +460,7 @@
                 "Vérification d'intégrité",
                 "Support USB 3.0"
             ],
-            download: "https://github.com/PS4-Backup/Backup-Tool/releases/latest/download/BackupTool.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Backup/Backup-Tool/main/BackupTool.pkg",
             requirements: "USB ou disque externe"
         },
         {
@@ -487,7 +479,7 @@
                 "Profils personnalisés",
                 "Sauvegarde de configurations"
             ],
-            download: "https://github.com/GoldHEN/GoldHEN_Settings/releases/latest/download/GoldHEN-Settings.pkg",
+            download: "https://raw.githubusercontent.com/GoldHEN/GoldHEN_Settings/main/GoldHEN-Settings.pkg",
             requirements: "GoldHEN 2.0 ou supérieur"
         },
         {
@@ -506,7 +498,7 @@
                 "Mode verbose",
                 "Compatible tous firmwares"
             ],
-            download: "https://github.com/PS4-Debug/Debug-Tty/releases/latest/download/DebugTty.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Debug/Debug-Tty/main/DebugTty.pkg",
             requirements: "Pour développeurs uniquement"
         },
 
@@ -527,7 +519,7 @@
                 "Sons système thématiques",
                 "Compatible tous firmwares"
             ],
-            download: "https://github.com/PS4-Themes/God-of-War/releases/latest/download/GodOfWar-Theme.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Themes/God-of-War/main/GodOfWar-Theme.pkg",
             requirements: "Installation via Package Installer puis Paramètres > Thèmes"
         },
         {
@@ -546,7 +538,7 @@
                 "Icônes style encre japonaise",
                 "Effets visuels zen"
             ],
-            download: "https://github.com/PS4-Themes/Ghost-of-Tsushima/releases/latest/download/GoT-Theme.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Themes/Ghost-of-Tsushima/main/GoT-Theme.pkg",
             requirements: "Installation via Package Installer puis Paramètres > Thèmes"
         },
         {
@@ -565,7 +557,7 @@
                 "Icônes style ruines anciennes",
                 "Animations de flammes"
             ],
-            download: "https://github.com/PS4-Themes/Elden-Ring/releases/latest/download/EldenRing-Theme.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Themes/Elden-Ring/main/EldenRing-Theme.pkg",
             requirements: "Installation via Package Installer puis Paramètres > Thèmes"
         },
         {
@@ -584,7 +576,7 @@
                 "Icônes super-héros",
                 "Animation de web-swinging"
             ],
-            download: "https://github.com/PS4-Themes/Spider-Man/releases/latest/download/SpiderMan-Theme.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Themes/Spider-Man/main/SpiderMan-Theme.pkg",
             requirements: "Installation via Package Installer puis Paramètres > Thèmes"
         },
         {
@@ -603,7 +595,7 @@
                 "Icônes style victorien sombre",
                 "Effets de sang et ombres"
             ],
-            download: "https://github.com/PS4-Themes/Bloodborne/releases/latest/download/Bloodborne-Theme.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Themes/Bloodborne/main/Bloodborne-Theme.pkg",
             requirements: "Installation via Package Installer puis Paramètres > Thèmes"
         },
         {
@@ -622,7 +614,7 @@
                 "Icônes style Nora",
                 "Effets de lumière dorée"
             ],
-            download: "https://github.com/PS4-Themes/Horizon-Zero-Dawn/releases/latest/download/HZD-Theme.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Themes/Horizon-Zero-Dawn/main/HZD-Theme.pkg",
             requirements: "Installation via Package Installer puis Paramètres > Thèmes"
         },
         {
@@ -641,7 +633,7 @@
                 "Icônes style survie",
                 "Ambiance désolée et poétique"
             ],
-            download: "https://github.com/PS4-Themes/The-Last-of-Us/releases/latest/download/TLOU-Theme.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Themes/The-Last-of-Us/main/TLOU-Theme.pkg",
             requirements: "Installation via Package Installer puis Paramètres > Thèmes"
         },
         {
@@ -660,7 +652,7 @@
                 "Icônes style cyberpunk",
                 "Animations de publicités néon"
             ],
-            download: "https://github.com/PS4-Themes/Cyberpunk-2077/releases/latest/download/Cyberpunk-Theme.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Themes/Cyberpunk-2077/main/Cyberpunk-Theme.pkg",
             requirements: "Installation via Package Installer puis Paramètres > Thèmes"
         },
         {
@@ -679,7 +671,7 @@
                 "Icônes style materia",
                 "Animations d'invocations"
             ],
-            download: "https://github.com/PS4-Themes/Final-Fantasy-VII/releases/latest/download/FF7-Theme.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Themes/Final-Fantasy-VII/main/FF7-Theme.pkg",
             requirements: "Installation via Package Installer puis Paramètres > Thèmes"
         },
         {
@@ -698,7 +690,7 @@
                 "Icônes style âmes",
                 "Animations de flammes sacrées"
             ],
-            download: "https://github.com/PS4-Themes/Dark-Souls-III/releases/latest/download/DS3-Theme.pkg",
+            download: "https://raw.githubusercontent.com/PS4-Themes/Dark-Souls-III/main/DS3-Theme.pkg",
             requirements: "Installation via Package Installer puis Paramètres > Thèmes"
         }
     ];
@@ -706,6 +698,18 @@
     let filteredApps = [...apps];
     let currentFilter = 'all';
     let currentApp = null;
+
+    // Fonction pour corriger automatiquement les liens GitHub
+    function fixGitHubLink(url) {
+        if (!url) return url;
+        
+        // Si c'est un lien blob, le convertir en raw
+        if (url.includes('github.com') && url.includes('/blob/')) {
+            return url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+        }
+        
+        return url;
+    }
 
     function render() {
         const grid = document.getElementById('mainGrid');
@@ -801,13 +805,29 @@
         document.getElementById('modalBody').innerHTML = bodyHTML;
         
         const downloadBtn = document.getElementById('modalDownload');
-        downloadBtn.href = currentApp.download;
         
         if (currentApp.category === 'themes') {
             downloadBtn.innerHTML = '📥 TÉLÉCHARGER LE THÈME (PKG)';
         } else {
             downloadBtn.innerHTML = '📥 TÉLÉCHARGER PKG';
         }
+        
+        // Configuration du téléchargement forcé
+        downloadBtn.onclick = function(e) {
+            e.preventDefault();
+            
+            const correctedUrl = fixGitHubLink(currentApp.download);
+            
+            // Créer un lien temporaire pour forcer le téléchargement
+            const link = document.createElement('a');
+            link.href = correctedUrl;
+            link.download = currentApp.name.replace(/\s+/g, '-') + '.pkg';
+            link.target = '_blank';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
         
         document.getElementById('modalOverlay').classList.add('active');
     }
@@ -816,37 +836,8 @@
         document.getElementById('modalOverlay').classList.remove('active');
     }
 
-    function sendToPS4() {
-        const ps4Ip = document.getElementById('ps4IpInput').value.trim();
-        
-        if (!ps4Ip || !ps4Ip.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/)) {
-            alert('⚠️ Veuillez entrer une adresse IP PS4 valide (ex: 192.168.1.10)');
-            return;
-        }
-        
-        if (!currentApp) {
-            alert('⚠️ Aucune app sélectionnée');
-            return;
-        }
-        
-        alert(`🚀 Envoi de "${currentApp.name}" vers ${ps4Ip}...\n\n⚠️ Fonctionnalité en développement.\nPour l'instant, utilisez le bouton TÉLÉCHARGER PKG puis installez manuellement via USB ou FTP.`);
-    }
-
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
-    });
-
-    // Save PS4 IP to localStorage
-    document.getElementById('ps4IpInput').addEventListener('change', (e) => {
-        localStorage.setItem('ps4_ip', e.target.value);
-    });
-
-    // Load saved PS4 IP
-    window.addEventListener('load', () => {
-        const savedIp = localStorage.getItem('ps4_ip');
-        if (savedIp) {
-            document.getElementById('ps4IpInput').value = savedIp;
-        }
     });
 
     render();
