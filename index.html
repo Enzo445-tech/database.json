@@ -3,401 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXA DIGITAL STORE</title>
+    <title>NEXA DIGITAL STORE - DATABASE EDITION</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --ps5-blue: #0070cc; --ps5-white: #ffffff; --ps5-black: #000000; --ps5-gray: #1a1a1a; --ps5-light-gray: #2d2d2d; --accent: #00d4ff; }
-        body { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: var(--ps5-white); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow-x: hidden; }
+        :root { --ps5-blue: #0070cc; --ps5-white: #ffffff; --ps5-black: #000000; --ps5-gray: #1a1a1a; --accent: #00d4ff; }
+        body { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: var(--ps5-white); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; }
         
-        /* HEADER */
-        header { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+        header { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
         .logo { font-size: 28px; font-weight: 900; background: linear-gradient(135deg, #0070cc, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; }
         .search-box { flex: 1; max-width: 500px; margin: 0 40px; }
-        .search-box input { width: 100%; padding: 14px 24px; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 30px; color: white; font-size: 14px; transition: all 0.3s; }
-        .search-box input:focus { outline: none; background: rgba(255, 255, 255, 0.12); border-color: var(--accent); box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
-        .search-box input::placeholder { color: rgba(255, 255, 255, 0.4); }
-        .version { background: rgba(0, 112, 204, 0.2); backdrop-filter: blur(10px); padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 700; color: var(--accent); border: 1px solid rgba(0, 212, 255, 0.3); }
-        
-        /* LOADING */
-        .loading { text-align: center; padding: 100px 20px; color: var(--accent); }
-        .loading-spinner { border: 4px solid rgba(0, 212, 255, 0.2); border-top: 4px solid var(--accent); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        /* NAV */
-        nav { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); padding: 0 40px; display: flex; gap: 10px; overflow-x: auto; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .nav-item { padding: 20px 32px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.3s; font-weight: 600; color: rgba(255, 255, 255, 0.6); white-space: nowrap; position: relative; }
-        .nav-item:hover { color: var(--ps5-white); background: rgba(255, 255, 255, 0.05); }
-        .nav-item.active { color: var(--ps5-white); border-bottom-color: var(--ps5-blue); }
-        .nav-item .count { background: rgba(0, 212, 255, 0.2); padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 8px; }
-        
-        /* CONTAINER */
+        .search-box input { width: 100%; padding: 14px 24px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 30px; color: white; outline: none; transition: 0.3s; }
+        .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 212, 255, 0.3); }
+
+        nav { background: rgba(0, 0, 0, 0.5); padding: 0 40px; display: flex; gap: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .nav-item { padding: 20px 25px; cursor: pointer; color: rgba(255, 255, 255, 0.6); font-weight: 600; border-bottom: 3px solid transparent; transition: 0.3s; }
+        .nav-item.active { color: white; border-bottom-color: var(--ps5-blue); }
+
         .container { padding: 40px; max-width: 1800px; margin: 0 auto; }
-        .section { display: none; }
-        .section.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .section-header { margin-bottom: 30px; }
-        .section-title { font-size: 28px; font-weight: 800; color: var(--accent); margin-bottom: 10px; }
-        .section-subtitle { color: rgba(255, 255, 255, 0.5); font-size: 14px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; }
         
-        /* GRID */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; }
-        .card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .card:hover { transform: translateY(-12px) scale(1.02); border-color: var(--accent); box-shadow: 0 20px 60px rgba(0, 212, 255, 0.4); background: rgba(255, 255, 255, 0.06); }
-        .card-cover { width: 100%; aspect-ratio: 3/4; background-size: cover; background-position: center; position: relative; background-color: #1a1a1a; }
-        .card-badge { position: absolute; top: 12px; right: 12px; background: rgba(0, 112, 204, 0.95); backdrop-filter: blur(10px); color: white; padding: 6px 14px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(255, 255, 255, 0.2); }
-        .card-info { padding: 18px; background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3)); }
-        .card-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: rgba(255, 255, 255, 0.5); }
-        .card-size { color: var(--accent); font-weight: 700; }
+        .card { background: rgba(255, 255, 255, 0.03); border-radius: 15px; overflow: hidden; cursor: pointer; transition: 0.4s; border: 1px solid rgba(255, 255, 255, 0.08); position: relative; }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2); }
+        .card-cover { width: 100%; aspect-ratio: 3/4; background-size: cover; background-position: center; background-color: #222; }
+        .card-info { padding: 15px; }
+        .card-title { font-size: 14px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
-        /* MODAL */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(20px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; animation: fadeIn 0.3s; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; }
         .modal-overlay.active { display: flex; }
-        .modal { background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(40px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; max-width: 1100px; width: 100%; max-height: 90vh; overflow: hidden; display: flex; box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8); animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
-        @keyframes slideUp { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .modal-left { flex: 1.3; background: #000; background-size: cover; background-position: center; min-height: 500px; }
-        .modal-right { flex: 1; padding: 40px; display: flex; flex-direction: column; overflow-y: auto; }
-        .modal-close { position: absolute; top: 20px; right: 25px; font-size: 40px; cursor: pointer; color: rgba(255, 255, 255, 0.4); transition: 0.3s; z-index: 10; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); border-radius: 50%; }
-        .modal-close:hover { color: var(--accent); transform: rotate(90deg); background: rgba(0, 212, 255, 0.2); }
-        .modal-title { font-size: 30px; font-weight: 900; background: linear-gradient(135deg, #ffffff, #0070cc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; line-height: 1.2; }
-        .modal-info { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 25px; padding: 20px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); }
-        .info-item { display: flex; flex-direction: column; gap: 6px; }
-        .info-label { font-size: 11px; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-        .info-value { font-size: 15px; font-weight: 700; color: white; word-break: break-all; }
-        .modal-desc { font-size: 14px; line-height: 1.8; color: rgba(255, 255, 255, 0.7); margin-bottom: 30px; flex: 1; }
-        .btn-download { background: linear-gradient(135deg, #0070cc, #00d4ff); color: white; border: none; padding: 20px; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: 0 8px 24px rgba(0, 112, 204, 0.4); }
-        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0, 212, 255, 0.6); }
-        .btn-download:active { transform: translateY(0); }
+        .modal { background: #1a1a1a; width: 90%; max-width: 900px; border-radius: 20px; display: flex; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); position: relative; flex-wrap: wrap; }
+        .modal-left { flex: 1; min-width: 300px; background-size: cover; background-position: center; min-height: 400px; }
+        .modal-right { flex: 1; min-width: 300px; padding: 40px; display: flex; flex-direction: column; }
+        .btn-download { background: var(--ps5-blue); color: white; border: none; padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: auto; transition: 0.3s; }
+        .btn-download:hover { background: var(--accent); transform: scale(1.02); }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; cursor: pointer; color: white; z-index: 10; }
         
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            header { padding: 15px 20px; }
-            .logo { font-size: 22px; }
-            .search-box { display: none; }
-            nav { padding: 0 20px; }
-            .container { padding: 20px; }
-            .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
-            .modal { flex-direction: column; max-height: 90vh; }
-            .modal-left { min-height: 300px; }
-            .modal-right { padding: 25px; }
-        }
+        #status { text-align: center; padding: 40px; color: var(--accent); font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">NEXA STORE</div>
-        <div class="search-box">
-            <input type="text" placeholder="Rechercher..." id="searchInput">
-        </div>
-        <div class="version">V1.0</div>
+        <div class="search-box"><input type="text" id="searchInput" placeholder="Rechercher parmi 6000+ jeux..."></div>
     </header>
 
-    <nav id="mainNav">
-        <div class="nav-item active" data-section="games">JEUX <span class="count" id="gamesCount">0</span></div>
-        <div class="nav-item" data-section="apps">APPS <span class="count" id="appsCount">0</span></div>
-        <div class="nav-item" data-section="themes">THÈMES <span class="count" id="themesCount">0</span></div>
-        <div class="nav-item" data-section="dlc">DLC <span class="count" id="dlcCount">0</span></div>
+    <nav>
+        <div class="nav-item active" data-cat="all">TOUT</div>
+        <div class="nav-item" data-cat="Games">JEUX</div>
+        <div class="nav-item" data-cat="Updates">MAJ</div>
+        <div class="nav-item" data-cat="DLC">DLC</div>
     </nav>
 
     <div class="container">
-        <section id="games" class="section active">
-            <div class="section-header">
-                <h2 class="section-title">Jeux Disponibles</h2>
-                <p class="section-subtitle">Base de données PKG en temps réel</p>
-            </div>
-            <div class="loading" id="loadingGames">
-                <div class="loading-spinner"></div>
-                <p>Connexion à la base de données...</p>
-            </div>
-            <div class="grid" id="gamesGrid"></div>
-        </section>
-
-        <section id="apps" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Applications</h2>
-                <p class="section-subtitle">Homebrew et utilitaires</p>
-            </div>
-            <div class="grid" id="appsGrid"></div>
-        </section>
-
-        <section id="themes" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Thèmes</h2>
-                <p class="section-subtitle">Personnalisez votre PS4</p>
-            </div>
-            <div class="grid" id="themesGrid"></div>
-        </section>
-
-        <section id="dlc" class="section">
-            <div class="section-header">
-                <h2 class="section-title">DLC & Updates</h2>
-                <p class="section-subtitle">Contenus additionnels</p>
-            </div>
-            <div class="grid" id="dlcGrid"></div>
-        </section>
+        <div id="status">Chargement de la base de données...</div>
+        <div class="grid" id="mainGrid"></div>
     </div>
 
-    <div class="modal-overlay" id="modalOverlay" onclick="if(event.target === this) closeModal()">
+    <div class="modal-overlay" id="modalOverlay" onclick="if(event.target==this)closeModal()">
         <div class="modal">
-            <div class="modal-close" onclick="closeModal()">×</div>
+            <span class="close-btn" onclick="closeModal()">&times;</span>
             <div class="modal-left" id="modalImg"></div>
             <div class="modal-right">
-                <h2 class="modal-title" id="modalTitle"></h2>
-                <div class="modal-info">
-                    <div class="info-item">
-                        <span class="info-label">Taille</span>
-                        <span class="info-value" id="modalSize"></span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Content ID</span>
-                        <span class="info-value" id="modalID"></span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Région</span>
-                        <span class="info-value" id="modalRegion">EUR/USA</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Format</span>
-                        <span class="info-value">PKG</span>
-                    </div>
-                </div>
-                <p class="modal-desc" id="modalDesc">Fichier PKG disponible au téléchargement. Installation via USB ou Remote PKG Installer.</p>
-                <button class="btn-download" onclick="downloadPkg()">⬇️ TÉLÉCHARGER PKG</button>
+                <h2 id="modalTitle" style="margin-bottom:20px;"></h2>
+                <p style="margin-bottom:10px; color:#aaa;">ID: <span id="modalID" style="color:var(--accent)"></span></p>
+                <p style="margin-bottom:10px; color:#aaa;">Région: <span id="modalRegion" style="color:var(--accent)"></span></p>
+                <p style="margin-bottom:30px; color:#aaa;">Taille: <span id="modalSize" style="color:var(--accent)"></span></p>
+                <button class="btn-download" onclick="downloadLink()">TÉLÉCHARGER LE PKG</button>
             </div>
         </div>
     </div>
 
     <script>
-        // ============================================
-        // CONFIGURATION
-        // ============================================
-        const DATABASE_URL = "https://raw.githubusercontent.com/itssclover/PS4_PKGi_Database/main/pkgi.txt";
-        const CORS_PROXY = "https://api.allorigins.win/raw?url=";
+        // URLs vers la "pépite" GitHub
+        const DB_URL = "https://raw.githubusercontent.com/huggingfacer04/ps4-games-database/main/data/games.json";
+        const PROXY = "https://api.allorigins.win/raw?url=";
 
-        let db = { games: [], apps: [], themes: [], dlc: [] };
+        let gameDatabase = [];
         let currentItem = null;
 
-        // ============================================
-        // INITIALISATION
-        // ============================================
-        async function initStore() {
+        async function loadData() {
             try {
-                console.log("🔄 Connexion à la base de données PKG...");
+                const response = await fetch(PROXY + encodeURIComponent(DB_URL));
+                if (!response.ok) throw new Error("Erreur Proxy");
+                const data = await response.json();
                 
-                // Utiliser le proxy CORS
-                const proxyUrl = CORS_PROXY + encodeURIComponent(DATABASE_URL);
-                const response = await fetch(proxyUrl);
-                
-                if (!response.ok) {
-                    throw new Error(`Erreur HTTP: ${response.status}`);
-                }
-                
-                const text = await response.text();
-                const lines = text.split('\n');
+                // On nettoie et prépare les données
+                gameDatabase = data.map(game => ({
+                    id: game.id || "N/A",
+                    name: game.name || "Inconnu",
+                    region: game.region || "Global",
+                    size: game.size || "N/A",
+                    category: game.category || "Games",
+                    url: game.download_url || "",
+                    cover: `https://store.playstation.com/store/api/chihiro/00_09_000/container/US/en/999/${game.id}/image?w=400&h=400`
+                }));
 
-                console.log(`📦 ${lines.length} lignes trouvées dans la base`);
-
-                // Réinitialiser
-                db = { games: [], apps: [], themes: [], dlc: [] };
-
-                let processed = 0;
-                lines.forEach((line, index) => {
-                    line = line.trim();
-                    
-                    // Ignorer les lignes vides et commentaires
-                    if (!line || line.startsWith('#')) return;
-                    
-                    // Format CSV avec séparateur ;
-                    const parts = line.split(';');
-                    
-                    if (parts.length >= 4) {
-                        // Format attendu: ContentID;Type;Name;Description;URL;Size;...
-                        const contentId = parts[0].trim();
-                        const name = parts[2].trim();
-                        const url = parts[4] ? parts[4].trim() : '';
-                        const size = parts[5] ? parts[5].trim() : 'N/A';
-
-                        // Valider que c'est bien un Content ID PS4
-                        if (!contentId || !name || !contentId.includes('CUSA')) return;
-
-                        // Générer l'URL de l'image via l'API Sony
-                        const coverUrl = `https://store.playstation.com/store/api/chihiro/00_09_000/container/FR/fr/99/9/${contentId}/image?w=480&h=480`;
-
-                        const item = {
-                            name: name,
-                            id: contentId,
-                            url: url,
-                            size: size,
-                            cover: coverUrl
-                        };
-
-                        // Classification intelligente
-                        const nameLower = name.toLowerCase();
-                        
-                        if (nameLower.includes('theme') || nameLower.includes('thème')) {
-                            db.themes.push(item);
-                        } else if (nameLower.includes('update') || nameLower.includes('patch') || 
-                                   nameLower.includes('dlc') || nameLower.includes('addon')) {
-                            db.dlc.push(item);
-                        } else if (size.includes('MB') || parseFloat(size) < 0.5) {
-                            db.apps.push(item);
-                        } else {
-                            db.games.push(item);
-                        }
-
-                        processed++;
-                    }
-                });
-
-                console.log(`✅ ${processed} items traités avec succès`);
-                console.log(`   - Jeux: ${db.games.length}`);
-                console.log(`   - Apps: ${db.apps.length}`);
-                console.log(`   - Thèmes: ${db.themes.length}`);
-                console.log(`   - DLC: ${db.dlc.length}`);
-
-                // Masquer le loading
-                const loadingEl = document.getElementById('loadingGames');
-                if (loadingEl) loadingEl.style.display = 'none';
-
-                // Mettre à jour les compteurs
-                document.getElementById('gamesCount').textContent = db.games.length;
-                document.getElementById('appsCount').textContent = db.apps.length;
-                document.getElementById('themesCount').textContent = db.themes.length;
-                document.getElementById('dlcCount').textContent = db.dlc.length;
-
-                // Rendre les grilles
-                renderAll();
-
-            } catch (error) {
-                console.error("❌ Erreur de chargement:", error);
-                const loadingEl = document.getElementById('loadingGames');
-                if (loadingEl) {
-                    loadingEl.innerHTML = `
-                        <div style="text-align: center; padding: 50px;">
-                            <h2 style="color: #ff4444; margin-bottom: 20px;">⚠️ Échec de connexion</h2>
-                            <p style="margin-bottom: 10px; color: #999;">Impossible de charger la base de données.</p>
-                            <p style="margin-bottom: 30px; color: #666; font-size: 12px;">Erreur: ${error.message}</p>
-                            <button onclick="location.reload()" style="padding: 15px 30px; background: linear-gradient(135deg, #0070cc, #00d4ff); color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 14px;">🔄 RÉESSAYER</button>
-                        </div>
-                    `;
-                }
+                document.getElementById('status').style.display = 'none';
+                render(gameDatabase);
+            } catch (err) {
+                document.getElementById('status').innerHTML = "⚠️ Erreur : Impossible de charger la base GitHub.";
+                console.error(err);
             }
         }
 
-        // ============================================
-        // RENDU DES GRILLES
-        // ============================================
-        function renderGrid(data, gridId, badge) {
-            const grid = document.getElementById(gridId);
-            if (!grid) return;
-            
-            if (data.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: #666; padding: 50px;">Aucun contenu disponible</p>';
-                return;
-            }
-            
-            // Limiter à 200 pour la performance
-            const displayData = data.slice(0, 200);
-            
-            grid.innerHTML = displayData.map(item => {
-                const escapedId = item.id.replace(/'/g, "\\'");
-                return `
-                    <div class="card" onclick="openModal('${escapedId}')">
-                        <div class="card-cover" style="background-image: url('${item.cover}')">
-                            <div class="card-badge">${badge}</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title">${item.name}</div>
-                            <div class="card-meta">
-                                <span>${item.id.substring(0, 9)}...</span>
-                                <span class="card-size">${item.size}</span>
-                            </div>
-                        </div>
+        function render(list) {
+            const grid = document.getElementById('mainGrid');
+            grid.innerHTML = list.slice(0, 150).map(game => `
+                <div class="card" onclick="openModal('${game.id}')">
+                    <div class="card-cover" style="background-image:url('${game.cover}'), url('https://via.placeholder.com/300x400?text=PS4')"></div>
+                    <div class="card-info">
+                        <div class="card-title">${game.name}</div>
+                        <div style="font-size:10px; color:var(--accent); margin-top:5px;">${game.region} • ${game.size}</div>
                     </div>
-                `;
-            }).join('');
+                </div>
+            `).join('');
         }
 
-        function renderAll() {
-            renderGrid(db.games, 'gamesGrid', 'JEU');
-            renderGrid(db.apps, 'appsGrid', 'APP');
-            renderGrid(db.themes, 'themesGrid', 'THÈME');
-            renderGrid(db.dlc, 'dlcGrid', 'DLC');
-        }
+        // Système de recherche
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = gameDatabase.filter(g => g.name.toLowerCase().includes(term) || g.id.toLowerCase().includes(term));
+            render(filtered);
+        });
 
-        // ============================================
-        // NAVIGATION
-        // ============================================
-        document.querySelectorAll('.nav-item').forEach(btn => {
-            btn.onclick = () => {
-                document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-                document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById(btn.dataset.section).classList.add('active');
+        // Navigation par catégorie
+        document.querySelectorAll('.nav-item').forEach(nav => {
+            nav.onclick = () => {
+                document.querySelector('.nav-item.active').classList.remove('active');
+                nav.classList.add('active');
+                const cat = nav.dataset.cat;
+                const filtered = cat === 'all' ? gameDatabase : gameDatabase.filter(g => g.category === cat);
+                render(filtered);
             };
         });
 
-        // ============================================
-        // RECHERCHE
-        // ============================================
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            const currentSection = document.querySelector('.nav-item.active').dataset.section;
-            
-            if (term.length < 2) {
-                const badgeMap = { games: 'JEU', apps: 'APP', themes: 'THÈME', dlc: 'DLC' };
-                renderGrid(db[currentSection], currentSection + 'Grid', badgeMap[currentSection]);
-                return;
-            }
-            
-            const filtered = db[currentSection].filter(g => 
-                g.name.toLowerCase().includes(term) || 
-                g.id.toLowerCase().includes(term)
-            );
-            
-            const badgeMap = { games: 'JEU', apps: 'APP', themes: 'THÈME', dlc: 'DLC' };
-            renderGrid(filtered, currentSection + 'Grid', badgeMap[currentSection]);
-        });
-
-        // ============================================
-        // MODAL
-        // ============================================
         function openModal(id) {
-            const allItems = [...db.games, ...db.apps, ...db.themes, ...db.dlc];
-            currentItem = allItems.find(item => item.id === id);
-            
-            if (!currentItem) {
-                console.error("Item introuvable:", id);
-                return;
-            }
-            
+            currentItem = gameDatabase.find(g => g.id === id);
             document.getElementById('modalTitle').textContent = currentItem.name;
-            document.getElementById('modalSize').textContent = currentItem.size;
             document.getElementById('modalID').textContent = currentItem.id;
-            
-            const modalImg = document.getElementById('modalImg');
-            modalImg.style.backgroundImage = `url('${currentItem.cover}')`;
-            
+            document.getElementById('modalRegion').textContent = currentItem.region;
+            document.getElementById('modalSize').textContent = currentItem.size;
+            document.getElementById('modalImg').style.backgroundImage = `url('${currentItem.cover}'), url('https://via.placeholder.com/300x400?text=PS4')`;
             document.getElementById('modalOverlay').classList.add('active');
         }
 
-        function closeModal() {
-            document.getElementById('modalOverlay').classList.remove('active');
-        }
+        function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); }
 
-        function downloadPkg() {
-            if (currentItem && currentItem.url && currentItem.url !== '') {
+        function downloadLink() {
+            if(currentItem && currentItem.url) {
                 window.open(currentItem.url, '_blank');
             } else {
-                alert("⚠️ Lien de téléchargement non disponible pour ce titre.");
+                alert("Lien non disponible.");
             }
         }
 
-        // ============================================
-        // LANCEMENT
-        // ============================================
-        window.onload = initStore;
+        loadData();
     </script>
 </body>
 </html>
