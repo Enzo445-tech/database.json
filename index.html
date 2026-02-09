@@ -24,15 +24,11 @@
             gap: 30px;
         }
         
-        .logo { 
-            font-size: 26px; 
-            font-weight: 900; 
-            background: linear-gradient(to right, #0070cc, #00d4ff); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            letter-spacing: 2px; 
-            white-space: nowrap;
-        }
+       .logo { 
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
         
         .search-box { flex: 1; max-width: 600px; }
         .search-box input { width: 100%; padding: 14px 28px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; color: white; outline: none; transition: 0.3s; font-size: 14px; }
@@ -137,7 +133,9 @@
 <body>
 
 <header>
-    <div class="logo">NEXA STORE</div>
+    <div class="logo">
+    <img src="logo.png" alt="NEXA" style="height: 40px; width: auto; vertical-align: middle;">
+</div>
     <div class="search-box">
         <input type="text" id="searchInput" placeholder="Rechercher des apps, thèmes, outils...">
     </div>
