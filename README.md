@@ -36,7 +36,6 @@
 Le Nexa Store continue d'évoluer avec de nouvelles fonctionnalités et du contenu ajouté régulièrement :
 
 * **📚 Catalogue Enrichi :** Nous travaillons sur un inventaire beaucoup plus complet. Vous y trouverez bientôt toutes les références incontournables du hack PS4, mais aussi des "pépites cachées" et des homebrews moins connus qui méritent le détour.
-* **⚠️ Nexa Error (Système de diagnostic) :** Pour faciliter le support technique, un système de codes erreurs spécifique au store sera prochainement intégré afin de mieux identifier les éventuels problèmes de connexion ou de téléchargement.
 * **🔄 Optimisations Constantes :** Amélioration de la compatibilité avec les différentes versions de navigateurs PS4.
 
 
