@@ -6,3 +6,7 @@ v1.2.2 (09/02/26)
 v1.2.3 (11/02/26)
 -Optimisation du système Unicode
 -Ajout d'un système de code erreur : Nexa Error, sous format NX-000
+
+v1.2.4 (12/02/26)
+-Allègement visuel : infos de compatibilité déplacées en haut de page
+-Nouveau système de version des fichiers propre au Store
