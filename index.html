@@ -159,8 +159,17 @@
         <div class="version">V1.2.4</div>
     </div>
 </header>
-    <div class="info-banner">
-     Tous les contenus nécessitent <strong>GoldHEN</strong> et une console jailbreakée (<strong>FW 5.05 - 12.52</strong>)
+   <div style="
+    background: #1a1a1a; 
+    border: 1px solid #333; 
+    color: #888; 
+    padding: 10px 20px; 
+    border-radius: 50px; 
+    font-size: 13px;
+    text-align: center;
+    margin: 15px auto;
+    max-width: fit-content;">
+    \u2139\uFE0F Requiert <span style="color: #eee;">GoldHEN</span> \u2022 Firmware <span style="color: #eee;">5.05 - 12.52</span>
 </div>
 
 <div class="tabs">
@@ -538,10 +547,7 @@ Use of these names and trademarks does not imply any affiliation with or endorse
             `;
         }
         
-        bodyHTML += `
-            <h3>Prérequis</h3>
-            <p>${currentApp.requirements}</p>
-        `;
+        
         
         document.getElementById('modalBody').innerHTML = bodyHTML;
         
